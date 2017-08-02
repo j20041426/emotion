@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Demo</title>
+		<link rel="stylesheet" type="text/css" href="dist/emotion.css"/>
+		<style type="text/css">
+		    .show,.code {
+		        width: 500px;
+		        height: 66px;
+		        border: 1px solid #666666;
+		        border-radius: 5px;
+		    }
+		    .wrap {
+		        width: 500px;
+		        display: flex;
+		        justify-content: space-between;
+		    }
+			#input {
+			    width: 400px;
+			    height: 66px;
+			    border: 1px solid #666666;
+			    border-radius: 5px;
+			}
+			.send {
+			    width: 66px;
+			    height: 66px;
+			    line-height: 66px;
+			    text-align: center;
+			    border: 1px solid #666666;
+                border-radius: 5px;
+			}
+			.send:hover {
+			    background-color: #cccccc;
+			    cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+	    <p>编码区：</p>
+        <div class="code"></div>
+	    <p>展示区：</p>
+	    <div class="show"></div>
+	    <p>输入区：<a href="javascript:void(0)">表情</a></p>
+	    <div class="wrap">
+    	    <div id="input" contenteditable></div>
+    	    <div class="send">发送</div>
+        </div>
+        <script type="text/javascript" src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript" src="dist/emotion.js"></script>
+        <script type="text/javascript">
+        	Zepto(function($){
+        	    
+                $('a').emotion();
+  
+                $('.send')
+                .click(function(){
+                    $('.code').html($.emoEncode($('#input').html()));
+                })
+                
+                $('.code').bind("DOMSubtreeModified", function(){
+                    $('.show').html($.emoDecode($(this).html()));
+                })
+                
+            })
+        </script>
+	</body>
+</html>
